@@ -1,5 +1,8 @@
 package com.estudoJPA.domain.user;
 
+import java.math.BigDecimal;
+
+import com.estudoJPA.dtos.UserDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,6 +24,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,4 +36,15 @@ public class User {
     private String email;
     @Enumerated(EnumType.STRING)
     private UserType userType;
+    private BigDecimal balance;
+    private String password;
+
+    public User(UserDTO data) {
+        this.firstName = data.getFirstName();
+        this.lastName = data.getLastName();
+        this.balance = data.getBalance();
+        this.userType = data.getUserType();
+        this.email = data.getEmail();
+        this.password = data.getPassword();
+    }
 }
