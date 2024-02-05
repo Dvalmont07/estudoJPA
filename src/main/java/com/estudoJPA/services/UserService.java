@@ -17,7 +17,7 @@ public class UserService {
 
     public void validateTransaction(User sender, BigDecimal amaount) throws Exception {
         if (sender.getUserType() == UserType.MERCHANT) {
-            throw new Exception("Typo de usuário incorreto");
+            throw new Exception("Tipo de usuário incorreto");
         }
         if (sender.getBalance().compareTo(amaount) < 0) {
             throw new Exception("Saldo insuficinete");

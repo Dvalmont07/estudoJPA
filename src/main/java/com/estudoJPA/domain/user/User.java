@@ -44,6 +44,7 @@ public class User {
     public User(UserDTO data) {
         this.firstName = data.getFirstName();
         this.lastName = data.getLastName();
+        this.document = data.getDocument();
         this.balance = data.getBalance();
         this.userType = data.getUserType();
         this.email = data.getEmail();

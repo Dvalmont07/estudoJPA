@@ -17,13 +17,13 @@ import com.estudoJPA.services.TransactionService;
 
 @RestController
 @RequestMapping("/transactions")
-public class TransactionsController {
+public class TransactionController {
 
     @Autowired
     private TransactionService service;
 
     @PostMapping
-    public ResponseEntity<Transaction> createTransaction(@RequestBody TransactionDTO transaction) throws Exception {
+    public ResponseEntity<Transaction> createTransactionEntity(@RequestBody TransactionDTO transaction) throws Exception {
         return new ResponseEntity<>(service.create(transaction), HttpStatus.CREATED);
     }
 
