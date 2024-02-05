@@ -7,20 +7,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estudoJPA.domain.user.User;
 import com.estudoJPA.dtos.UserDTO;
 import com.estudoJPA.services.UserService;
 
-@RestController("/users")
+@RestController()
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> createUserEntity(UserDTO user) {
+    public ResponseEntity<User> createUserEntity(@RequestBody UserDTO user) {
         return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
     }
 

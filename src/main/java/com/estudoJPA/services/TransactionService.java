@@ -2,8 +2,8 @@ package com.estudoJPA.services;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class TransactionService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public void createTransaction(TransactionDTO transaction) throws Exception {
+    public Transaction create(TransactionDTO transaction) throws Exception {
         User sender = userService.findUserById(transaction.getSenderId());
         User receiver = userService.findUserById(transaction.getReceiverId());
 
@@ -43,9 +43,9 @@ public class TransactionService {
         sender.setBalance(sender.getBalance().subtract(transaction.getValue()));
         receiver.setBalance(receiver.getBalance().add(transaction.getValue()));
 
-        repository.save(newTransaction);
         userService.saveUser(sender);
         userService.saveUser(receiver);
+        return repository.save(newTransaction);
 
     }
 
@@ -62,5 +62,9 @@ public class TransactionService {
             return "Autorizado".equals(messageString);
         }
         return false;
+    }
+
+    public List<Transaction> getAll() {
+        return repository.findAll();
     }
 }
